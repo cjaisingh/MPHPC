@@ -8,13 +8,10 @@ class Page {
 	
 	// Setup public functions
 	public function __construct(&$settings){
-		if(isset($settings['views'])){
-			if(isset($settings['views']['body'])){
-				if(is_array($settings['views']['body'])){
-					if($settings['views']['body']['forms'] == true){
-						require_once('form.class.php');
-					}
-				}
+		// Include forms if requested
+		if(isset($settings['forms'])){
+			if($settings['forms'] == true){
+				require_once('form.class.php');
 			}
 		}
 		$this->settings = $settings;

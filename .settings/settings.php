@@ -2,9 +2,10 @@
 // Define Configuration Options
 $settings = array(
 	'constants' => array(
-		'SITE_DOMAIN' => 'local.myphpc.theryanhowell.co.uk',
+		'SITE_DOMAIN' => 'local.mphpc.theryanhowell.co.uk',
 		'SITE_NAME' => 'MPHPC',
-		'ENVIRONMENT' => 'DEV'
+		'ENVIRONMENT' => 'DEV',
+		'PROTOCOL' => 'https'
 	),
 	'database' => array(
 		'host' => 'localhost',

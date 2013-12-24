@@ -3,13 +3,18 @@ require_once('../.core/core.php');
 $pageSettings = array(
 	'views' => array(
 		'header' => array(
-			'pageName' => 'Index'
+			'pageName' => 'Index',
+			'css' => array(
+				'main' => true
+			),
+			'js' => array(
+				'main' => true
+			)
 		),
-		'body' => array(
-			'forms' => true
-		),
+		'body' => true,
 		'footer' => true
 	),
+	'forms' => true
 );
 $thisPage = new Page($pageSettings);
 $body = &$thisPage->body;
