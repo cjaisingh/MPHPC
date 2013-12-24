@@ -18,7 +18,7 @@ if(isset($viewSettings['pageName'])){
 if(isset($viewSettings['css'])){
 	// Link the resoucres
 	foreach($viewSettings['css'] as $row => $value){
-		echo '<link rel="stylesheet" type="text/css" href="'.PROTOCOL.'://'.SITE_DOMAIN.'/resources/css/'.$row.'.sass.css">'.PHP_EOL;
+		echo '<link rel="stylesheet" type="text/css" href="'.PROTOCOL.'://'.SITE_DOMAIN.'/resources/css/'.$row.'.scss.css">'.PHP_EOL;
 	}
 }
 // If this page uses js
