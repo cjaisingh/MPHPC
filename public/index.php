@@ -22,7 +22,7 @@ $database->close();
 $body .= $row[0]['name'];
 
 $testForm = new Form();
-$testForm->button('button', 'buttonName', 'buttonValue', 'buttonClass', 'onClick();', true);
+$testForm->button();
 $body .= $testForm->render();
 
 $thisPage->render();

@@ -5,14 +5,18 @@ class Form {
 	private $formBodyHTML = '';
 	private $formEndHTML;
 	
-	public function __construct($createForm = false, $name = false, $action = '#'){
+	public function __construct($createForm = false, $name = false, $action = '#', $onSubmit = false){
 		if($createForm){
-			// If we don't have a form name, create one user a unique id
+			// If we don't have a form name, create one using a unique id
 			if($name == false){
 				$name = uniqid();	
 			}
 			$this->formName = $name;
-			$this->formStartHTML = '<form id="'.$name.'" name="'.$name.'" action="'.$action.'">';
+			$this->formStartHTML = '<form id="'.$name.'" name="'.$name.'" action="'.$action.'"';
+			if($onSubmit != false){
+				$this->formStartHTML .= ' onsubmit="'.$onSubmit.'"';	
+			};
+			$this->formStartHTML .= '>';
 			$this->formEndHTML = '<form>';
 		}
 	}
