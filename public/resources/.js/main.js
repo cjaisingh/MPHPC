@@ -1,0 +1,1 @@
+/* Should generate tom main.compiled.js */
