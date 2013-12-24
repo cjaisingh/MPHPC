@@ -1,3 +1,4 @@
+<footer>
 <?php
 	if(ENVIRONMENT == 'DEV'){
 		$endTime = microtime();
@@ -7,5 +8,6 @@
 		echo '<p>Page generated in '.$total_time.' seconds.</p>';	
 	}
 ?>
+</footer>
 </body>
 </html>
