@@ -12,6 +12,10 @@ class Site {
 			define($row,$value);
 		}
 		$this->settings = $settings;
+		if(isset($settings['database'])){
+			// Setup Database
+			require_once('db.class.php');	
+		}
 	}
 	// Setup Public Functions
 	public function getSettings(){

@@ -2,20 +2,21 @@
 // Define Configuration Options
 $settings = array(
 	'constants' => array(
-		'SITE_NAME' => 'local.myphpc.theryanhowell.co.uk',
+		'SITE_DOMAIN' => 'local.myphpc.theryanhowell.co.uk',
+		'SITE_NAME' => 'MPHPC',
 		'ENVIRONMENT' => 'DEV'
 	),
 	'database' => array(
 		'host' => 'localhost',
 		'username' => 'root',
 		'password' => 'rnebcmzemvbn',
-		'databasename' => 'myphpc'
-	)
+		'databasename' => 'mphpc'
+	),
+	'urlRewrites' => true
 );
 // Create Site
-require_once('site.php');
+require_once('site.class.php');
 $GLOBALS['SITE'] = new Site($settings);
 
-// Setup Database
-require_once('db.php');
-
+// Get the page class
+require_once('page.class.php');
