@@ -5,7 +5,9 @@ $pageSettings = array(
 		'header' => array(
 			'pageName' => 'Index'
 		),
-		'body' => true,
+		'body' => array(
+			'forms' => true
+		),
 		'footer' => true
 	),
 );
@@ -18,6 +20,10 @@ $row = $database->getAssociativeResult();
 $database->close();
 
 $body .= $row[0]['name'];
+
+$testForm = new Form();
+$testForm->button('button', 'buttonName', 'buttonValue', 'buttonClass', 'onClick();', true);
+$body .= $testForm->render();
 
 $thisPage->render();
 ?>
