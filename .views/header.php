@@ -38,3 +38,16 @@ if(isset($viewSettings['js'])){
 <![endif]-->
 </head>
 <body>
+<header>
+	<nav class="clear">
+		<ul role="list">
+			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>">Home</a> </li>
+			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/resources">Resources</a> </li>
+			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/forms">Forms</a> </li>
+			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/database">Database</a> </li>
+			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/hooks">Hooks</a> </li>
+		</ul>
+	</nav>
+</header>
+<div class="clear"></div>
+<section id="page">
