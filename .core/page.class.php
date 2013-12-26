@@ -37,6 +37,14 @@ class Page {
 		}
 		return true;	
 	}
+	
+	public function renderView($view){
+		if(isset($this->settings['views'][$view])){
+			// Render header
+			echo $this->getView($view,$this->settings['views'][$view]);
+		}
+		return true;	
+	}
 	// Setup private functions
 	private function getView(&$viewName,$viewSettings) {
 		// If view exists
