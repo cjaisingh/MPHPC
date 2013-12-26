@@ -5,7 +5,8 @@ $settings = array(
 		'SITE_DOMAIN' => 'local.mphpc.theryanhowell.co.uk',
 		'SITE_NAME' => 'MPHPC',
 		'ENVIRONMENT' => 'DEV',
-		'PROTOCOL' => 'https'
+		'PROTOCOL' => 'https',
+		'AUTHOR' => 'Ryan Howell'
 	),
 	'database' => array(
 		'host' => 'localhost',

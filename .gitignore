@@ -1,12 +1,2 @@
-public/_notes/dwsync.xml
-.core/_notes/dwsync.xml
-.views/_notes/dwsync.xml
-.settings/_notes/dwsync.xml
-_notes/dwsync.xml
-.hooks/_notes/dwsync.xml
-public/resources/.js/_notes/dwsync.xml
-public/resources/.sass/_notes/dwsync.xml
-public/resources/_notes/dwsync.xml
-public/resources/css/_notes/dwsync.xml
-public/resources/js/_notes/dwsync.xml
-public/resources/.scss/_notes/dwsync.xml
+*.scssc
+dwsync.xml
