@@ -42,6 +42,7 @@ if(isset($viewSettings['js'])){
 	<nav class="clear">
 		<ul role="list">
 			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>">Home</a> </li>
+			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/views">Views</a> </li>
 			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/resources">Resources</a> </li>
 			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/forms">Forms</a> </li>
 			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/database">Database</a> </li>
