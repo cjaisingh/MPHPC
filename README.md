@@ -22,3 +22,10 @@ To Do
 -   Login System
 
 This is still extremely unfinished.
+
+License
+----------
+
+- Copyright © Ryan Howell 2013
+- All Rights Reserved.
+- Any work contributed is solely owned by that contributor and acknowledge that their work can only be used within this project without express written consent from Ryan Howell.
