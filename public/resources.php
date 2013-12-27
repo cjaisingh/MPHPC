@@ -3,7 +3,7 @@ require_once('../.core/core.php');
 $pageSettings = array(
 	'views' => array(
 		'header' => array(
-			'pageName' => 'Hooks',
+			'pageName' => 'Resources',
 			'css' => array(
 				'main' => true
 			),
