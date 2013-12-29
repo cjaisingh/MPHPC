@@ -14,6 +14,8 @@ $settings = array(
 		'password' => 'rnebcmzemvbn',
 		'databasename' => 'mphpc'
 	),
-	'urlRewrites' => true
+	'urlRewrites' => true,
+	'jsCompilation' => true,
+	'dartCompilation' => true
 );
 ?>
