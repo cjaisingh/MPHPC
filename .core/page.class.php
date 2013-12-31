@@ -14,6 +14,14 @@ class Page {
 				require_once('form.class.php');
 			}
 		}
+		if(isset($settings['authentication'])){
+			if($settings['authentication'] == true){
+				if(!isset($_SESSION['user'])){
+					header('Location: '.PROTOCOL.'://'.SITE_DOMAIN);
+					exit();	
+				}
+			}
+		}
 		$this->settings = $settings;
 		return true;
 	}

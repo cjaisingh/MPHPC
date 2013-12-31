@@ -47,6 +47,7 @@ if(isset($viewSettings['js'])){
 			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/forms">Forms</a> </li>
 			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/database">Database</a> </li>
 			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/hooks">Hooks</a> </li>
+			<li role="listitem"> <a href="<?php echo PROTOCOL.'://'.SITE_DOMAIN; ?>/users">Users</a> </li>
 		</ul>
 	</nav>
 </header>
