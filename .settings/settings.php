@@ -14,6 +14,9 @@ $settings = array(
 		'password' => 'rnebcmzemvbn',
 		'databasename' => 'mphpc'
 	),
+	'users' => array(
+		'salt' => 'h65be9/}Cv~\'L#d`M*3_e.;P;V{X`,ZrMv2.p?7UfLqt,>Dg~?R`#sj=E*U72.ywap]/K?\']4"ssF*sFn*(JU~`GxenQMN!yG"_7@2)+Pj/r]_]7V>\'8u[\'3DynFL)xfF'
+	),
 	'urlRewrites' => true,
 	'jsCompilation' => true,
 	'dartCompilation' => true
