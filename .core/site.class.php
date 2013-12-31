@@ -25,6 +25,9 @@ class Site {
 			// Setup Database
 			require_once('db.class.php');	
 		}
+		if(isset($settings['users'])){
+			require_once('user.class.php');
+		}
 	}
 	// Setup Public Functions
 	public function getSettings(){
@@ -35,5 +38,8 @@ class Site {
 		return $this->startTime;	
 	}
 	// Setup Private Functions
+	private function __autoload($class_name) {
+    	require_once strtolower($class_name) . 'class.php';
+	}
 }
 ?>
