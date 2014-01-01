@@ -9,11 +9,16 @@ class Form {
 		Function: Form Constructor
 		Usage: Call the function to generate a form, pass through options to customize.
 		Options:
-			NAME          ACCEPTED VALUES   DEFAULT VALUE   DESCRIPTION
-			createForm => (true, false)     [false]         (Enable creating the form element around your inputs)
-			name 	   => (true, false)     [false]         (Set the name and id attributes of the form element)
-			action     => (true, false)     [false]         (Set the action attribute of the form element)
-			onSubmit   => (true, false)     [false]         (Set the onsubmit attribute of the form element)
+			NAME             ACCEPTED VALUES   DEFAULT VALUE   DESCRIPTION
+			createForm   => (true, false)          [false]     (Enable creating the form element around your inputs)
+			name 	     => (true, false)          [false]     (Specifies the name and id attributes of the form element)
+			action       => (true, false)          [false]     (Specifies where to send the form-data when a form is submitted)
+			onSubmit     => (true, false)          [false]     (Set the onsubmit attribute of the form element)
+			autocomplete => (true, false)          [false]     (Specifies whether a form should have autocomplete on or off)
+			novalidate   => (true, false)          [false]     (Specifies that the form should not be validated when submitted)
+			method       => ('get', 'post', false) [false]     (Specifies the HTTP method to use when sending form-data)
+			target       => ('_blank', '_self', '_parent', '_top', false) [false]
+			enctype => ('application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain', false) [false] (Specifies how the form-data should be encoded when submitting it to the server (only for method="post"))
 	*/
 	public function __construct($options = array()){
 		// Set default option values
@@ -30,6 +35,21 @@ class Form {
 		if(!isset($options['onSubmit'])){
 			$options['onSubmit'] = false;
 		}
+		if(!isset($options['autocomplete'])){
+			$options['autocomplete'] = false;
+		}
+		if(!isset($options['novalidate'])){
+			$options['novalidate'] = false;
+		}
+		if(!isset($options['method'])){
+			$options['method'] = false;
+		}
+		if(!isset($options['target'])){
+			$options['target'] = false;
+		}
+		if(!isset($options['enctype'])){
+			$options['enctype'] = false;
+		}
 		if($options['createForm']){
 			// Set the form name
 			$this->formName = $options['name'];
@@ -45,6 +65,31 @@ class Form {
 			// Allow setting the onSubmit
 			if($options['onSubmit'] != false){
 				$this->formStartHTML .= ' onsubmit="'.$options['onSubmit'].'"';	
+			};
+			
+			// Allow setting the autocomplete
+			if($options['autocomplete'] != false){
+				$this->formStartHTML .= ' autocomplete="'.$options['autocomplete'].'"';	
+			};
+			
+			// Allow setting the novalidate
+			if($options['novalidate'] != false){
+				$this->formStartHTML .= ' novalidate="novalidate"';	
+			};
+			
+			// Allow setting the method
+			if($options['method'] != false){
+				$this->formStartHTML .= ' method="'.$options['method'].'"';	
+			};
+			
+			// Allow setting the target
+			if($options['target'] != false){
+				$this->formStartHTML .= ' method="'.$options['target'].'"';	
+			};
+			
+			// Allow setting the enctype
+			if($options['enctype'] != false){
+				$this->formStartHTML .= ' enctype="'.$options['enctype'].'"';	
 			};
 			
 			// Close off the element
@@ -67,15 +112,19 @@ class Form {
 		Function: Button Constructor
 		Usage: Call the function to generate a button, pass through options to customize.
 		Options:
-			NAME          ACCEPTED VALUES     DEFAULT VALUE   DESCRIPTION
-			type      => ('button', 'submit') ['button']      (Set the type attribute of the button element)
-			name 	  => (true, false) 		  [false]         (Set the name and id attributes of the button element)
-			value     => (true, false) 		  [ucfirst(type)] (Set the value attribute of the button element)
-			class     => (true, false) 		  [false]         (Set the class attribute of the button element)
-			onClick   => (true, false) 		  [false]         (Set the onClick attribute of the button element)
-			autofocus => (true, false) 		  [false]         (Set the autofocus attribute of the button element)
-			disabled  => (true, false) 		  [false]         (Set the disabled attribute of the button element)
-			
+			NAME               ACCEPTED VALUES                 DEFAULT VALUE   DESCRIPTION
+			type           => ('button', 'submit', 'reset')    ['button']      (Specifies the type of the button)
+			name 	       => (true, false) 		           [false]         (Specifies a name and id for the button)
+			value          => (true, false) 		           [ucfirst(type)] (Specifies an initial value for the button)
+			class          => (true, false) 		           [false]         (Specifies the class of the button)
+			onClick        => (true, false) 		           [false]         (Specifies the onClick of the button)
+			autofocus      => (true, false) 		           [false]         (Specifies that a button should automatically get focus when the page loads)
+			disabled       => (true, false) 		           [false]         (Specifies that a button should be disabled)
+			formaction     => (URL, false) 		               [false]         (Specifies where to send the form-data when a form is submitted. Only for type='submit')
+			formmethod     => ('get','post', false) 		   [false]         (Specifies how to send the form-data (which HTTP method to use). Only for type="submit")
+			formnovalidate => (true, false) 		           [false]         (Specifies that the form-data should not be validated on submission. Only for type="submit")
+			formtarget     => ('_blank', '_self', '_parent', '_top', framename, false) [false] (Specifies where to display the response after submitting the form. Only for type="submit")
+			formenctype => ('application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain', false) [false] (Specifies how form-data should be encoded before sending it to a server. Only for type="submit")
 	*/
 	public function button($options = array()){
 		// Set default option values
@@ -97,14 +146,30 @@ class Form {
 		if(!isset($options['autofocus'])){
 			$options['autofocus'] = false;
 		}
-		if(!isset($options['disabled'])){
-			$options['disabled'] = false;
+		if(!isset($options['formaction'])){
+			$options['formaction'] = false;
+		}
+		if(!isset($options['formmethod'])){
+			$options['formmethod'] = false;
+		}
+		if(!isset($options['formnovalidate'])){
+			$options['formnovalidate'] = false;
+		}
+		if(!isset($options['formtarget'])){
+			$options['formtarget'] = false;
+		}
+		if(!isset($options['formenctype'])){
+			$options['formenctype'] = false;
 		}
 		// Draw the start of the button
 		$this->formBodyHTML .= '<button type="'.$options['type'].'"';
 		// Allow disabling the button
 		if($options['disabled'] != false){
 			$this->formBodyHTML .= ' disabled="disabled"';
+		}
+		// Allow setting the autofocus
+		if($options['autofocus'] != false){
+			$this->formBodyHTML .= ' autofocus="autofocus"';
 		}
 		// Allow setting the class
 		if($options['class'] != false){
@@ -118,14 +183,30 @@ class Form {
 		if($options['name'] != false){
 			$this->formBodyHTML .= ' name="'.$options['name'].'" id="'.$options['name'].'"';
 		}
-		// Allow setting the autofocus
-		if($options['autofocus'] != false){
-			$this->formBodyHTML .= ' autofocus="autofocus"';
+		// Allow setting the formaction
+		if($options['formaction'] != false){
+			$this->formBodyHTML .= ' formaction="'.$options['formaction'].'"';
+		}
+		// Allow setting the formmethod
+		if($options['formmethod'] != false){
+			$this->formBodyHTML .= ' formmethod="'.$options['formmethod'].'"';
+		}
+		// Allow setting the formnovalidate
+		if($options['formnovalidate'] != false){
+			$this->formBodyHTML .= ' formnovalidate="'.$options['formnovalidate'].'"';
+		}
+		// Allow setting the formtarget
+		if($options['formtarget'] != false){
+			$this->formBodyHTML .= ' formtarget="'.$options['formtarget'].'"';
+		}
+		// Allow setting the formenctype
+		if($options['formenctype'] != false){
+			$this->formBodyHTML .= ' formenctype="'.$options['formenctype'].'"';
 		}
 		// Force setting the value
 		if($options['value'] == false){
 			$options['value'] = ucfirst($options['type']);	
 		}
-		$this->formBodyHTML .= '>'.$options['value'].'</button>';
+		$this->formBodyHTML .= ' form="'.$this->formName.'">'.$options['value'].'</button>';
 	}
 };
