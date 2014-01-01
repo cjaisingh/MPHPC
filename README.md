@@ -19,7 +19,6 @@ To Do
 
 -   Expand forms class to include more input methods
 -   Standard for session variables according to page
--   Login System
 
 This is still extremely unfinished.
 
