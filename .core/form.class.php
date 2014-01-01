@@ -238,6 +238,7 @@ class Form {
 			readonly       => (true, false)                    [false]         (Specifies that an input field is read-only)
 			maxlength      => (0-999, false)                   [false]         (Specifies the maximum number of characters allowed in an <input> element)
 			pattern        => (regexp, false)                  [false]         (Specifies a regular expression that an <input> element's value is checked against)
+			spellcheck     => (true, false)                    [false]         (Specifies whether the element is to have its spelling and grammar checked or not)
 	*/
 	public function textInput($options = array()){
 		// Set default option values
@@ -270,6 +271,9 @@ class Form {
 		}
 		if(!isset($options['pattern'])){
 			$options['pattern'] = false;
+		}
+		if(!isset($options['spellcheck'])){
+			$options['spellcheck'] = false;
 		}
 		// Draw the start of the input
 		$tempHTML = '<input type="'.$options['type'].'"';
@@ -304,6 +308,12 @@ class Form {
 		// Allow setting the pattern
 		if($options['pattern'] != false){
 			$tempHTML .= ' pattern="'.$options['pattern'].'"';
+		}
+		// Allow setting the spellcheck
+		if($options['spellcheck'] != false){
+			$tempHTML .= ' spellcheck="true"';
+		} else {
+			$tempHTML .= ' spellcheck="false"';
 		}
 		// Allow setting the name
 		if($options['name'] != false){
