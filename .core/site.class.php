@@ -26,6 +26,8 @@ class Site {
 			require_once('db.class.php');	
 		}
 		if(isset($settings['users'])){
+			session_save_path(str_replace('.core/site.class.php','.sessions/',__FILE__));
+			ini_set('session.gc_probability', 1);
 			require_once('user.class.php');
 		}
 	}
