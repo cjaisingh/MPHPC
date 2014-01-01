@@ -13,7 +13,7 @@ class Form {
 			createForm   => (true, false)          [false]     (Enable creating the form element around your inputs)
 			name 	     => (true, false)          [false]     (Specifies the name and id attributes of the form element)
 			action       => (true, false)          [false]     (Specifies where to send the form-data when a form is submitted)
-			onSubmit     => (true, false)          [false]     (Set the onsubmit attribute of the form element)
+			onsubmit     => (true, false)          [false]     (Set the onsubmit attribute of the form element)
 			autocomplete => (true, false)          [false]     (Specifies whether a form should have autocomplete on or off)
 			novalidate   => (true, false)          [false]     (Specifies that the form should not be validated when submitted)
 			method       => ('get', 'post', false) [false]     (Specifies the HTTP method to use when sending form-data)
@@ -32,8 +32,8 @@ class Form {
 		if(!isset($options['action'])){
 			$options['action'] = false;
 		}
-		if(!isset($options['onSubmit'])){
-			$options['onSubmit'] = false;
+		if(!isset($options['onsubmit'])){
+			$options['onsubmit'] = false;
 		}
 		if(!isset($options['autocomplete'])){
 			$options['autocomplete'] = false;
@@ -63,8 +63,8 @@ class Form {
 			};
 
 			// Allow setting the onSubmit
-			if($options['onSubmit'] != false){
-				$this->formStartHTML .= ' onsubmit="'.$options['onSubmit'].'"';	
+			if($options['onsubmit'] != false){
+				$this->formStartHTML .= ' onsubmit="'.$options['onsubmit'].'"';	
 			};
 			
 			// Allow setting the autocomplete
@@ -117,7 +117,7 @@ class Form {
 			name 	       => (true, false) 		           [false]         (Specifies a name and id for the button)
 			value          => (true, false) 		           [ucfirst(type)] (Specifies an initial value for the button)
 			class          => (true, false) 		           [false]         (Specifies the class of the button)
-			onClick        => (true, false) 		           [false]         (Specifies the onClick of the button)
+			onclick        => (true, false) 		           [false]         (Specifies the onClick of the button)
 			autofocus      => (true, false) 		           [false]         (Specifies that a button should automatically get focus when the page loads)
 			disabled       => (true, false) 		           [false]         (Specifies that a button should be disabled)
 			formaction     => (URL, false) 		               [false]         (Specifies where to send the form-data when a form is submitted. Only for type='submit')
@@ -140,8 +140,8 @@ class Form {
 		if(!isset($options['class'])){
 			$options['class'] = false;
 		}
-		if(!isset($options['onClick'])){
-			$options['onClick'] = false;
+		if(!isset($options['onclick'])){
+			$options['onclick'] = false;
 		}
 		if(!isset($options['autofocus'])){
 			$options['autofocus'] = false;
@@ -176,8 +176,8 @@ class Form {
 			$this->formBodyHTML .= ' class="'.$options['class'].'"';
 		}
 		// Allow setting the on click event
-		if($options['onClick'] != false){
-			$this->formBodyHTML .= ' onclick="'.$options['onClick'].'"';
+		if($options['onclick'] != false){
+			$this->formBodyHTML .= ' onclick="'.$options['onclick'].'"';
 		}
 		// Allow setting the name
 		if($options['name'] != false){
