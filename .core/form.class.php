@@ -121,11 +121,6 @@ class Form {
 			onclick        => (true, false) 		           [false]         (Specifies the onClick of the button)
 			autofocus      => (true, false) 		           [false]         (Specifies that a button should automatically get focus when the page loads)
 			disabled       => (true, false) 		           [false]         (Specifies that a button should be disabled)
-			formaction     => (URL, false) 		               [false]         (Specifies where to send the form-data when a form is submitted. Only for type='submit')
-			formmethod     => ('get','post', false) 		   [false]         (Specifies how to send the form-data (which HTTP method to use). Only for type="submit")
-			formnovalidate => (true, false) 		           [false]         (Specifies that the form-data should not be validated on submission. Only for type="submit")
-			formtarget     => ('_blank', '_self', '_parent', '_top', framename, false) [false] (Specifies where to display the response after submitting the form. Only for type="submit")
-			formenctype => ('application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain', false) [false] (Specifies how form-data should be encoded before sending it to a server. Only for type="submit")
 	*/
 	public function button($options = array()){
 		// Set default option values
@@ -153,21 +148,6 @@ class Form {
 		if(!isset($options['disabled'])){
 			$options['disabled'] = false;
 		}
-		if(!isset($options['formaction'])){
-			$options['formaction'] = false;
-		}
-		if(!isset($options['formmethod'])){
-			$options['formmethod'] = false;
-		}
-		if(!isset($options['formnovalidate'])){
-			$options['formnovalidate'] = false;
-		}
-		if(!isset($options['formtarget'])){
-			$options['formtarget'] = false;
-		}
-		if(!isset($options['formenctype'])){
-			$options['formenctype'] = false;
-		}
 		// Draw the start of the button
 		$tempHTML = '<button type="'.$options['type'].'"';
 		// Allow disabling the button
@@ -189,26 +169,6 @@ class Form {
 		// Allow setting the name
 		if($options['name'] != false){
 			$tempHTML .= ' name="'.$options['name'].'" id="'.$options['name'].'"';
-		}
-		// Allow setting the formaction
-		if($options['formaction'] != false){
-			$tempHTML .= ' formaction="'.$options['formaction'].'"';
-		}
-		// Allow setting the formmethod
-		if($options['formmethod'] != false){
-			$tempHTML .= ' formmethod="'.$options['formmethod'].'"';
-		}
-		// Allow setting the formnovalidate
-		if($options['formnovalidate'] != false){
-			$tempHTML .= ' formnovalidate="'.$options['formnovalidate'].'"';
-		}
-		// Allow setting the formtarget
-		if($options['formtarget'] != false){
-			$tempHTML .= ' formtarget="'.$options['formtarget'].'"';
-		}
-		// Allow setting the formenctype
-		if($options['formenctype'] != false){
-			$tempHTML .= ' formenctype="'.$options['formenctype'].'"';
 		}
 		// Force setting the value
 		if($options['value'] == false){
