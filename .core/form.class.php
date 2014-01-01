@@ -150,6 +150,9 @@ class Form {
 		if(!isset($options['autofocus'])){
 			$options['autofocus'] = false;
 		}
+		if(!isset($options['disabled'])){
+			$options['disabled'] = false;
+		}
 		if(!isset($options['formaction'])){
 			$options['formaction'] = false;
 		}
@@ -232,6 +235,9 @@ class Form {
 			onclick        => (true, false) 		           [false]         (Specifies the onClick of the input)
 			autofocus      => (true, false) 		           [false]         (Specifies that a input should automatically get focus when the page loads)
 			disabled       => (true, false) 		           [false]         (Specifies that a input should be disabled)
+			readonly       => (true, false)                    [false]         (Specifies that an input field is read-only)
+			maxlength      => (0-999, false)                   [false]         (Specifies the maximum number of characters allowed in an <input> element)
+			pattern        => (regexp, false)                  [false]         (Specifies a regular expression that an <input> element's value is checked against)
 	*/
 	public function textInput($options = array()){
 		// Set default option values
@@ -250,8 +256,20 @@ class Form {
 		if(!isset($options['onclick'])){
 			$options['onclick'] = false;
 		}
+		if(!isset($options['disabled'])){
+			$options['disabled'] = false;
+		}
 		if(!isset($options['autofocus'])){
 			$options['autofocus'] = false;
+		}
+		if(!isset($options['readonly'])){
+			$options['readonly'] = false;
+		}
+		if(!isset($options['maxlength'])){
+			$options['maxlength'] = false;
+		}
+		if(!isset($options['pattern'])){
+			$options['pattern'] = false;
 		}
 		// Draw the start of the input
 		$tempHTML = '<input type="'.$options['type'].'"';
@@ -267,6 +285,10 @@ class Form {
 		if($options['required'] != false){
 			$tempHTML .= ' required="required"';
 		}
+		// Allow setting the readonly
+		if($options['readonly'] != false){
+			$tempHTML .= ' readonly="readonly"';
+		}
 		// Allow setting the class
 		if($options['class'] != false){
 			$tempHTML .= ' class="'.$options['class'].'"';
@@ -274,6 +296,14 @@ class Form {
 		// Allow setting the on click event
 		if($options['onclick'] != false){
 			$tempHTML .= ' onclick="'.$options['onclick'].'"';
+		}
+		// Allow setting the maxlength
+		if($options['maxlength'] != false){
+			$tempHTML .= ' maxlength="'.$options['maxlength'].'"';
+		}
+		// Allow setting the pattern
+		if($options['pattern'] != false){
+			$tempHTML .= ' pattern="'.$options['pattern'].'"';
 		}
 		// Allow setting the name
 		if($options['name'] != false){
