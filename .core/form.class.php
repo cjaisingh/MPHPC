@@ -215,7 +215,79 @@ class Form {
 		if($options['createElement'] != false){
 			$this->formBodyHTML = $tempHTML .= ' form="'.$this->formName.'">'.$options['value'].'</button>';
 		} else {
-			return $tempHTML;
+			return $tempHTML .= ' form="'.$this->formName.'">'.$options['value'].'</button>';
+		}
+		unset($tempHTML);
+	}
+	/*
+		Function: Text Input Constructor
+		Usage: Call the function to generate a text input, pass through options to customize.
+		Options:
+			NAME               ACCEPTED VALUES                 DEFAULT VALUE   DESCRIPTION
+			createElement  => (true, false)					   [true]          (Specifies whether to generate the element as part of the form, or return the html)
+			required	   => (true, false)	                   [false]         (Specifies that an input field must be filled out before submitting the form)
+			name 	       => (true, false) 		           [false]         (Specifies a name and id for the input)
+			value          => (true, false) 		           [ucfirst(type)] (Specifies an initial value for the input)
+			class          => (true, false) 		           [false]         (Specifies the class of the input)
+			onclick        => (true, false) 		           [false]         (Specifies the onClick of the input)
+			autofocus      => (true, false) 		           [false]         (Specifies that a input should automatically get focus when the page loads)
+			disabled       => (true, false) 		           [false]         (Specifies that a input should be disabled)
+	*/
+	public function textInput($options = array()){
+		// Set default option values
+		if(!isset($options['createElement'])){
+			$options['createElement'] = true;
+		}
+		if(!isset($options['name'])){
+			$options['name'] = false;
+		}
+		if(!isset($options['value'])){
+			$options['value'] = false;
+		}
+		if(!isset($options['class'])){
+			$options['class'] = false;
+		}
+		if(!isset($options['onclick'])){
+			$options['onclick'] = false;
+		}
+		if(!isset($options['autofocus'])){
+			$options['autofocus'] = false;
+		}
+		// Draw the start of the input
+		$tempHTML = '<input type="'.$options['type'].'"';
+		// Allow disabling the button
+		if($options['disabled'] != false){
+			$tempHTML .= ' disabled="disabled"';
+		}
+		// Allow setting the autofocus
+		if($options['autofocus'] != false){
+			$tempHTML .= ' autofocus="autofocus"';
+		}
+		// Allow setting the required
+		if($options['required'] != false){
+			$tempHTML .= ' required="required"';
+		}
+		// Allow setting the class
+		if($options['class'] != false){
+			$tempHTML .= ' class="'.$options['class'].'"';
+		}
+		// Allow setting the on click event
+		if($options['onclick'] != false){
+			$tempHTML .= ' onclick="'.$options['onclick'].'"';
+		}
+		// Allow setting the name
+		if($options['name'] != false){
+			$tempHTML .= ' name="'.$options['name'].'" id="'.$options['name'].'"';
+		}
+		// Force setting the value
+		if($options['value'] == false){
+			$options['value'] = 'Text';
+		}
+		// Handle the html
+		if($options['createElement'] != false){
+			$this->formBodyHTML = $tempHTML .= ' form="'.$this->formName.'" value="'.$options['value'].'">';
+		} else {
+			return $tempHTML .= ' form="'.$this->formName.'" value="'.$options['value'].'">';
 		}
 		unset($tempHTML);
 	}
