@@ -113,6 +113,7 @@ class Form {
 		Usage: Call the function to generate a button, pass through options to customize.
 		Options:
 			NAME               ACCEPTED VALUES                 DEFAULT VALUE   DESCRIPTION
+			createElement  => (true, false)					   [true]          (Specifies whether to generate the element as part of the form, or return the html)
 			type           => ('button', 'submit', 'reset')    ['button']      (Specifies the type of the button)
 			name 	       => (true, false) 		           [false]         (Specifies a name and id for the button)
 			value          => (true, false) 		           [ucfirst(type)] (Specifies an initial value for the button)
@@ -130,6 +131,9 @@ class Form {
 		// Set default option values
 		if(!isset($options['type'])){
 			$options['type'] = 'button';
+		}
+		if(!isset($options['createElement'])){
+			$options['createElement'] = true;
 		}
 		if(!isset($options['name'])){
 			$options['name'] = false;
@@ -162,51 +166,57 @@ class Form {
 			$options['formenctype'] = false;
 		}
 		// Draw the start of the button
-		$this->formBodyHTML .= '<button type="'.$options['type'].'"';
+		$tempHTML = '<button type="'.$options['type'].'"';
 		// Allow disabling the button
 		if($options['disabled'] != false){
-			$this->formBodyHTML .= ' disabled="disabled"';
+			$tempHTML .= ' disabled="disabled"';
 		}
 		// Allow setting the autofocus
 		if($options['autofocus'] != false){
-			$this->formBodyHTML .= ' autofocus="autofocus"';
+			$tempHTML .= ' autofocus="autofocus"';
 		}
 		// Allow setting the class
 		if($options['class'] != false){
-			$this->formBodyHTML .= ' class="'.$options['class'].'"';
+			$tempHTML .= ' class="'.$options['class'].'"';
 		}
 		// Allow setting the on click event
 		if($options['onclick'] != false){
-			$this->formBodyHTML .= ' onclick="'.$options['onclick'].'"';
+			$tempHTML .= ' onclick="'.$options['onclick'].'"';
 		}
 		// Allow setting the name
 		if($options['name'] != false){
-			$this->formBodyHTML .= ' name="'.$options['name'].'" id="'.$options['name'].'"';
+			$tempHTML .= ' name="'.$options['name'].'" id="'.$options['name'].'"';
 		}
 		// Allow setting the formaction
 		if($options['formaction'] != false){
-			$this->formBodyHTML .= ' formaction="'.$options['formaction'].'"';
+			$tempHTML .= ' formaction="'.$options['formaction'].'"';
 		}
 		// Allow setting the formmethod
 		if($options['formmethod'] != false){
-			$this->formBodyHTML .= ' formmethod="'.$options['formmethod'].'"';
+			$tempHTML .= ' formmethod="'.$options['formmethod'].'"';
 		}
 		// Allow setting the formnovalidate
 		if($options['formnovalidate'] != false){
-			$this->formBodyHTML .= ' formnovalidate="'.$options['formnovalidate'].'"';
+			$tempHTML .= ' formnovalidate="'.$options['formnovalidate'].'"';
 		}
 		// Allow setting the formtarget
 		if($options['formtarget'] != false){
-			$this->formBodyHTML .= ' formtarget="'.$options['formtarget'].'"';
+			$tempHTML .= ' formtarget="'.$options['formtarget'].'"';
 		}
 		// Allow setting the formenctype
 		if($options['formenctype'] != false){
-			$this->formBodyHTML .= ' formenctype="'.$options['formenctype'].'"';
+			$tempHTML .= ' formenctype="'.$options['formenctype'].'"';
 		}
 		// Force setting the value
 		if($options['value'] == false){
 			$options['value'] = ucfirst($options['type']);	
 		}
-		$this->formBodyHTML .= ' form="'.$this->formName.'">'.$options['value'].'</button>';
+		// Handle the html
+		if($options['createElement'] != false){
+			$this->formBodyHTML = $tempHTML .= ' form="'.$this->formName.'">'.$options['value'].'</button>';
+		} else {
+			return $tempHTML;
+		}
+		unset($tempHTML);
 	}
 };
