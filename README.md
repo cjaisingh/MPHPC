@@ -24,6 +24,24 @@ This is still extremely unfinished.
 
 License
 ----------
+Copyright (c) Ryan Howell 2014
+
 GNU GENERAL PUBLIC LICENSE (Version 3, 29 June 2007)
 
 Full license is available at: http://www.gnu.org/licenses/gpl.html
+
+Required
+- Disclose Source 
+- License and copyright notice 
+- State Changes
+
+Permitted
+- Commercial Use 
+- Distribution 
+- Modification 
+- Patent Grant 
+- Private Use 
+
+Forbidden
+- Hold Liable 
+- Sublicensing
