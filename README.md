@@ -26,4 +26,4 @@ License
 ----------
 GNU GENERAL PUBLIC LICENSE (Version 3, 29 June 2007)
 
-Full license in available at: http://www.gnu.org/licenses/gpl.html
+Full license is available at: http://www.gnu.org/licenses/gpl.html
