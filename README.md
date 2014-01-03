@@ -19,6 +19,21 @@ To Do
 
 -   Expand forms class to include more input methods
 -   Standard for session variables according to page
+-   Calendar Handler
+-   Email Handler
+-   Encryption Handler
+-   File Handler
+-   Form Validation (Serverside) Handler
+-   Table Handler
+-   Input Handler
+-   Zip Encoding Handler
+-   URL Handler
+-   Error Handler
+-   CAPTCHA Handler
+-   Cookie Handler
+-   Date Handler
+-   Directory Handler
+-   Download Handler
 
 This is still extremely unfinished.
 
