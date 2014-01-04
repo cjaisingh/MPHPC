@@ -18,9 +18,6 @@ Feature List
 
 To Do
 -----
--	Compilation
-	-	Need to use a temp working directoy
-	-	Need to generate source maps where possible
 -   Forms
 	-	Expand to include more input methods
 	-	Create traits for each input method
@@ -44,6 +41,20 @@ To Do
 
 This is still extremely unfinished.
 
+Dependencies
+------------
+-	SASS
+	- ruby-dev
+	- scss --pre
+-	LESS
+	- node
+	- npm
+	- lessc
+-	JS
+	- Google Closure Compiler
+-	DART
+	- dart2js
+	
 License
 ----------
 Copyright (c) Ryan Howell 2014
