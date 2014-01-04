@@ -18,9 +18,6 @@ Feature List
 
 To Do
 -----
--	Compilation
-	-	Need to use a temp working directoy
-	-	Need to generate source maps where possible
 -   Forms
 	-	Expand to include more input methods
 	-	Create traits for each input method
