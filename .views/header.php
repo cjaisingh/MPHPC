@@ -25,7 +25,7 @@ if(isset($viewSettings['css'])){
 if(isset($viewSettings['js'])){
 	// Link the resoucres
 	foreach($viewSettings['js'] as $row => $value){
-		echo '<script src="'.PROTOCOL.'://'.SITE_DOMAIN.'/resources/js/'.$row.'.compiled.js"></script>'.PHP_EOL;
+		echo '<script src="'.PROTOCOL.'://'.SITE_DOMAIN.'/resources/js/'.$row.'.closure.js"></script>'.PHP_EOL;
 	}
 }
 ?>

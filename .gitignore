@@ -1,2 +1,3 @@
 *.scssc
 dwsync.xml
+.sessions/sess_*
