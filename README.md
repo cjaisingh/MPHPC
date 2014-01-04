@@ -11,7 +11,7 @@ Feature List
 -   Recursive SASS Compilation
 -   Recursive LESS Compilation
 -   Recursive JavaScript Compilation
--   Dart Compilation
+-   Recursive Dart Compilation
 -   Global Site Settings
 -   Database Class
 -   Forms Class
