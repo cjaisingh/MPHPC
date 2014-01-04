@@ -1,6 +1,9 @@
 <?php
-// @todo: Create traits for each input method
-// @todo: Use classes for each input method, forms class should only use those classes to append to the form
+/**
+ * Class Form
+ * @todo: Create traits for each input method
+ * @todo: Use classes for each input method, forms class should only use those classes to append to the form
+ */
 class Form
 {
     private $formName;
@@ -8,21 +11,20 @@ class Form
     private $formBodyHTML = '';
     private $formEndHTML;
 
-    /*
-        Function: Form Constructor
-        Usage: Call the function to generate a form, pass through options to customize.
-        Options:
-            NAME             ACCEPTED VALUES   DEFAULT VALUE   DESCRIPTION
-            createForm   => (true, false)          [false]     (Enable creating the form element around your inputs)
-            name 	     => (true, false)          [false]     (Specifies the name and id attributes of the form element)
-            action       => (true, false)          [false]     (Specifies where to send the form-data when a form is submitted)
-            onsubmit     => (true, false)          [false]     (Set the onsubmit attribute of the form element)
-            autocomplete => (true, false)          [false]     (Specifies whether a form should have autocomplete on or off)
-            novalidate   => (true, false)          [false]     (Specifies that the form should not be validated when submitted)
-            method       => ('get', 'post', false) [false]     (Specifies the HTTP method to use when sending form-data)
-            target       => ('_blank', '_self', '_parent', '_top', false) [false]
-            enctype => ('application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain', false) [false] (Specifies how the form-data should be encoded when submitting it to the server (only for method="post"))
-    */
+    /**
+     * Form Constructor
+     * Call the function to generate a form, pass through options to customize.
+     * @param createForm   => (true, false)          [false]     (Enable creating the form element around your inputs)
+     * @param name 	     => (true, false)          [false]     (Specifies the name and id attributes of the form element)
+     * @param action       => (true, false)          [false]     (Specifies where to send the form-data when a form is submitted)
+     * @param onsubmit     => (true, false)          [false]     (Set the onsubmit attribute of the form element)
+     * @param autocomplete => (true, false)          [false]     (Specifies whether a form should have autocomplete on or off)
+     * @param novalidate   => (true, false)          [false]     (Specifies that the form should not be validated when submitted)
+     * @param method       => ('get', 'post', false) [false]     (Specifies the HTTP method to use when sending form-data)
+     * @param target       => ('_blank', '_self', '_parent', '_top', false) [false]
+     * @param enctype => ('application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain', false) [false] (Specifies how the form-data should be encoded when submitting it to the server (only for method="post"))
+     * @return integer
+     */
     public function __construct($options = array())
     {
         // Set default option values
@@ -102,32 +104,33 @@ class Form
             // Make sure the form gets closed
             $this->formEndHTML = '</form>';
         }
+        return true;
     }
 
-    /*
-        Function: Form Render
-        Usage: Call the function to render the form created by this class
-    */
+    /**
+     * Form Render
+     * Call the function to render the form created by this class
+     * @return string
+     */
     public function render()
     {
         // Return all the generated html
         return $this->formStartHTML . $this->formBodyHTML . $this->formEndHTML;
     }
 
-    /*
-        Function: Button Constructor
-        Usage: Call the function to generate a button, pass through options to customize.
-        Options:
-            NAME               ACCEPTED VALUES                 DEFAULT VALUE   DESCRIPTION
-            createElement  => (true, false)					   [true]          (Specifies whether to generate the element as part of the form, or return the html)
-            type           => ('button', 'submit', 'reset')    ['button']      (Specifies the type of the button)
-            name 	       => (true, false) 		           [false]         (Specifies a name and id for the button)
-            value          => (true, false) 		           [ucfirst(type)] (Specifies an initial value for the button)
-            class          => (true, false) 		           [false]         (Specifies the class of the button)
-            onclick        => (true, false) 		           [false]         (Specifies the onClick of the button)
-            autofocus      => (true, false) 		           [false]         (Specifies that a button should automatically get focus when the page loads)
-            disabled       => (true, false) 		           [false]         (Specifies that a button should be disabled)
-    */
+    /**
+     * Button Constructor
+     * Call the function to generate a button, pass through options to customize.
+     * @param createElement  => (true, false)					 [true]          (Specifies whether to generate the element as part of the form, or return the html)
+     * @param type           => ('button', 'submit', 'reset')    ['button']      (Specifies the type of the button)
+     * @param name 	         => (true, false) 		             [false]         (Specifies a name and id for the button)
+     * @param value          => (true, false) 		             [ucfirst(type)] (Specifies an initial value for the button)
+     * @param class          => (true, false) 		             [false]         (Specifies the class of the button)
+     * @param onclick        => (true, false) 		             [false]         (Specifies the onClick of the button)
+     * @param autofocus      => (true, false) 		             [false]         (Specifies that a button should automatically get focus when the page loads)
+     * @param disabled       => (true, false) 		             [false]         (Specifies that a button should be disabled)
+     * @return string or integer
+     */
     public function button($options = array())
     {
         // Set default option values
@@ -184,30 +187,31 @@ class Form
         // Handle the html
         if ($options['createElement'] != false) {
             $this->formBodyHTML = $tempHTML .= ' form="' . $this->formName . '">' . $options['value'] . '</button>';
+            return true;
         } else {
             return $tempHTML .= ' form="' . $this->formName . '">' . $options['value'] . '</button>';
         }
-        unset($tempHTML);
+
+        return true;
     }
 
-    /*
-        Function: Text Input Constructor
-        Usage: Call the function to generate a text input, pass through options to customize.
-        Options:
-            NAME               ACCEPTED VALUES                 DEFAULT VALUE   DESCRIPTION
-            createElement  => (true, false)					   [true]          (Specifies whether to generate the element as part of the form, or return the html)
-            required	   => (true, false)	                   [false]         (Specifies that an input field must be filled out before submitting the form)
-            name 	       => (true, false) 		           [false]         (Specifies a name and id for the input)
-            value          => (true, false) 		           [ucfirst(type)] (Specifies an initial value for the input)
-            class          => (true, false) 		           [false]         (Specifies the class of the input)
-            onclick        => (true, false) 		           [false]         (Specifies the onClick of the input)
-            autofocus      => (true, false) 		           [false]         (Specifies that a input should automatically get focus when the page loads)
-            disabled       => (true, false) 		           [false]         (Specifies that a input should be disabled)
-            readonly       => (true, false)                    [false]         (Specifies that an input field is read-only)
-            maxlength      => (0-999, false)                   [false]         (Specifies the maximum number of characters allowed in an <input> element)
-            pattern        => (regexp, false)                  [false]         (Specifies a regular expression that an <input> element's value is checked against)
-            spellcheck     => (true, false)                    [false]         (Specifies whether the element is to have its spelling and grammar checked or not)
-    */
+    /**
+     * Text Input Constructor
+     * Call the function to generate a text input, pass through options to customize.
+     * @param createElement  => (true, false)		[true]          (Specifies whether to generate the element as part of the form, or return the html)
+     * @param required	   => (true, false)	        [false]         (Specifies that an input field must be filled out before submitting the form)
+     * @param name 	       => (true, false) 		[false]         (Specifies a name and id for the input)
+     * @param value          => (true, false) 		[ucfirst(type)] (Specifies an initial value for the input)
+     * @param class          => (true, false) 		[false]         (Specifies the class of the input)
+     * @param onclick        => (true, false) 		[false]         (Specifies the onClick of the input)
+     * @param autofocus      => (true, false) 		[false]         (Specifies that a input should automatically get focus when the page loads)
+     * @param disabled       => (true, false) 		[false]         (Specifies that a input should be disabled)
+     * @param readonly       => (true, false)       [false]         (Specifies that an input field is read-only)
+     * @param maxlength      => (0-999, false)      [false]         (Specifies the maximum number of characters allowed in an <input> element)
+     * @param pattern        => (regexp, false)     [false]         (Specifies a regular expression that an <input> element's value is checked against)
+     * @param spellcheck     => (true, false)       [false]         (Specifies whether the element is to have its spelling and grammar checked or not)
+     * @return string or integer
+     */
     public function textInput($options = array())
     {
         // Set default option values
@@ -295,27 +299,27 @@ class Form
         // Handle the html
         if ($options['createElement'] != false) {
             $this->formBodyHTML = $tempHTML .= ' form="' . $this->formName . '" value="' . $options['value'] . '">';
+            return true;
         } else {
             return $tempHTML .= ' form="' . $this->formName . '" value="' . $options['value'] . '">';
         }
-        unset($tempHTML);
+
     }
 
-    /*
-        Function: Checkbox Constructor
-        Usage: Call the function to generate a checkbox input, pass through options to customize.
-        Options:
-            NAME               ACCEPTED VALUES                 DEFAULT VALUE   DESCRIPTION
-            createElement  => (true, false)					   [true]          (Specifies whether to generate the element as part of the form, or return the html)
-            required	   => (true, false)	                   [false]         (Specifies that an input field must be filled out before submitting the form)
-            name 	       => (true, false) 		           [false]         (Specifies a name and id for the input)
-            checked        => (true, false) 		           [false]         (Specifies whether the checkbox is checked)
-            class          => (true, false) 		           [false]         (Specifies the class of the input)
-            onclick        => (true, false) 		           [false]         (Specifies the onClick of the input)
-            autofocus      => (true, false) 		           [false]         (Specifies that a input should automatically get focus when the page loads)
-            disabled       => (true, false) 		           [false]         (Specifies that a input should be disabled)
-            readonly       => (true, false)                    [false]         (Specifies that an input field is read-only)
-    */
+    /**
+     * Checkbox Constructor
+     * Call the function to generate a checkbox input, pass through options to customize.
+     * @param createElement  => (true, false)   [true]      (Specifies whether to generate the element as part of the form, or return the html)
+     * @param required	     => (true, false)   [false]     (Specifies that an input field must be filled out before submitting the form)
+     * @param name 	         => (true, false)   [false]     (Specifies a name and id for the input)
+     * @param checked        => (true, false)   [false]     (Specifies whether the checkbox is checked)
+     * @param class          => (true, false)   [false]     (Specifies the class of the input)
+     * @param onclick        => (true, false)   [false]     (Specifies the onClick of the input)
+     * @param autofocus      => (true, false)   [false]     (Specifies that a input should automatically get focus when the page loads)
+     * @param disabled       => (true, false)   [false]     (Specifies that a input should be disabled)
+     * @param readonly       => (true, false)   [false]     (Specifies that an input field is read-only)
+     * @return string or integer
+     */
     public function checkbox($options = array())
     {
         // Set default option values
@@ -380,10 +384,10 @@ class Form
         // Handle the html
         if ($options['createElement'] != false) {
             $this->formBodyHTML = $tempHTML .= ' form="' . $this->formName . '">';
+            return true;
         } else {
             return $tempHTML .= ' form="' . $this->formName . '">';
         }
-        unset($tempHTML);
     }
 }
 
