@@ -41,6 +41,20 @@ To Do
 
 This is still extremely unfinished.
 
+Dependencies
+------------
+-	SASS
+	- ruby-dev
+	- scss --pre
+-	LESS
+	- node
+	- npm
+	- lessc
+-	JS
+	- Google Closure Compiler
+-	DART
+	- dart2js
+	
 License
 ----------
 Copyright (c) Ryan Howell 2014
