@@ -1,3 +1,4 @@
 *.scssc
 dwsync.xml
 .sessions/sess_*
+.idea/*
