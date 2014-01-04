@@ -30,6 +30,7 @@ class Site {
 			ini_set('session.gc_probability', 1);
 			require_once('user.class.php');
 		}
+		unset($settings);
 	}
 	// Setup Public Functions
 	public function getSettings(){
