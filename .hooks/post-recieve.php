@@ -1,5 +1,7 @@
 <?php
 require_once('../.core/core.php');
+// @todo: Need compilation to use a temp working directoy
+// @todo: Need to generate source maps where possible
 
 // Directory Iterator
 function fillArrayWithFileNodes(DirectoryIterator $dir) {
