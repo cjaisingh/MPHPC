@@ -1,4 +1,6 @@
 <?php
+// @todo: Create traits for each input method
+// @todo: Use classes for each input method, forms class should only use those classes to append to the form
 class Form {
 	private $formName;
 	private $formStartHTML;
