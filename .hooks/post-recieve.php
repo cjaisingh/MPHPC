@@ -1,7 +1,5 @@
 <?php
 require_once('../.core/core.php');
-// @todo: Need compilation to use a temp working directoy
-// @todo: Need to generate source maps where possible
 
 // Directory Iterator
 function fillArrayWithFileNodes(DirectoryIterator $dir) {
@@ -23,35 +21,111 @@ function fillArrayWithFileNodes(DirectoryIterator $dir) {
     return $data;
 }
 
+// Recursively move directory from one to another
+function moveDirRecursively($src, $dest){
+ 
+    // If source is not a directory stop processing
+    if(!is_dir($src)) return false;
+ 
+    // If the destination directory does not exist create it
+    if(!is_dir($dest)) { 
+        if(!mkdir($dest)) {
+            // If the destination directory could not be created stop processing
+            return false;
+        }    
+    }
+ 
+    // Open the source directory to read in files
+    $i = new DirectoryIterator($src);
+    foreach($i as $f) {
+		// If this is a filke
+        if($f->isFile()) {
+			// Just rename it
+            rename($f->getRealPath(), "$dest/" . $f->getFilename());
+        } else if(!$f->isDot() && $f->isDir()) {
+            // This is a directory, move it recursively
+			moveDirRecursively($f->getRealPath(), "$dest/$f");
+			// Cleanup
+            unlink($f->getRealPath());
+        }
+    }
+	// Cleanup
+    unlink($src);
+	return true;
+}
+
+function copyDirRecursively($src, $dest){
+ 
+    // If source is not a directory stop processing
+    if(!is_dir($src)) return false;
+ 
+    // If the destination directory does not exist create it
+    if(!is_dir($dest)) { 
+        if(!mkdir($dest)) {
+            // If the destination directory could not be created stop processing
+            return false;
+        }    
+    }
+ 
+    // Open the source directory to read in files
+    $i = new DirectoryIterator($src);
+    foreach($i as $f) {
+		// if this is a file
+        if($f->isFile()) {
+			// Copy it
+            copy($f->getRealPath(), "$dest/" . $f->getFilename());
+        } else if(!$f->isDot() && $f->isDir()) {
+			// Recursively copy it
+            copyDirRecursively($f->getRealPath(), "$dest/$f");
+        }
+    }
+}
+
+function removeDirRecursively($dir) { 
+	// Get just the files/folders we need to remove
+	$files = array_diff(scandir($dir), array('.','..'));
+	// Loop through them 
+	foreach ($files as $file) {
+		// Delete them 
+		(is_dir("$dir/$file")) ? removeDirRecursively("$dir/$file") : unlink("$dir/$file"); 
+    }
+	// Remove the final directory
+	return rmdir($dir); 
+}
+
 // Function to help sort array by length
 function sortByLength($a, $b) {
     return strlen($a) - strlen($b);
 }
 
 // This will process all files according to type
-function processTypes($type, $path) {
+function processTypes($type, $path, $tmpPath) {
     // Output what type is processing
     echo 'Processing ' . strtoupper($type) . PHP_EOL;
-    
     // Process files according to type
     switch ($type) {
         case 'js';
-			if (!is_dir($path . '/.js/')) {
+			if (!is_dir($path . '/.js')) {
                 // Create the directoy if it doesn't exist
             	mkdir($path . '/.js/', 0777, true);
+            }
+			if (!is_dir($tmpPath . '/js')) {
+                // Create the directoy if it doesn't exist
+            	mkdir($tmpPath . '/js/', 0777, true);
             }
             // Get all the files we need to process
             $result = processFiles(fillArrayWithFileNodes(new DirectoryIterator($path . '/.js/')));
             
             // Sort those files by length (!IMPORTANT if not sorted by length, you do not create directories before you process the file)
             usort($result, 'sortByLength');
-            
-            // Loop through each file
+			
+			// Loop through each file
             foreach ($result as $row => $value) {
                 
                 // Define where the new compiled file is going
-				$oldPath = $path . '/.js/' . $value;
-                $newPath = $path . '/js/' . str_replace('.js', '.closure.js', $value);
+				$oldPath = '.js/' . $value;
+                $newPath = 'js/' . str_replace('.js', '.closure.js', $value);
+				$sourceMapName = str_replace($tmpPath, '.', $newPath) . '.map';
 				
                 // Check that the directoy exists
                 $directoy = dirname($newPath) . '/';
@@ -62,11 +136,11 @@ function processTypes($type, $path) {
                 }
                 
                 // Output that we are processing that file
-                echo '	Processing File: ' . $oldPath . ' -> ' . $newPath . PHP_EOL;
+                echo '	Processing File (With SourceMap): ' . $value . PHP_EOL;
                 
                 // Process the file
-                $output = processFile('java -jar /bin/closure-compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js ' . $oldPath . ' --js_output_file ' . $newPath );
-                
+                $output = processFile('java -jar /bin/closure-compiler.jar --compilation_level WHITESPACE_ONLY --js ' . $oldPath . ' --js_output_file ' . $newPath . ' --source_map_format=V3 --create_source_map "' . $sourceMapName . '"');
+				
                 // If the output has generated an error, stop
                 if ($output === false) {
                     return false;
@@ -74,9 +148,13 @@ function processTypes($type, $path) {
             }
             break;
         case 'sass':
-			if (!is_dir($path . '/.scss/')) {
+			if (!is_dir($path . '/.scss')) {
                 // Create the directoy if it doesn't exist
             	mkdir($path . '/.scss/', 0777, true);
+            }
+			if (!is_dir($tmpPath . '/scss')) {
+                // Create the directoy if it doesn't exist
+            	mkdir($tmpPath . '/scss/', 0777, true);
             }
 			// Get all the files we need to process
             $result = processFiles(fillArrayWithFileNodes(new DirectoryIterator($path . '/.scss/')));
@@ -88,8 +166,8 @@ function processTypes($type, $path) {
             foreach ($result as $row => $value) {
                 
                 // Define where the new compiled file is going
-				$oldPath = $path . '/.scss/' . $value;
-                $newPath = $path . '/css/' . str_replace('.scss', '.scss.css', $value);
+				$oldPath = '.scss/' . $value;
+                $newPath = 'css/' . str_replace('.scss', '.scss.css', $value);
                 
                 // Check that the directoy exists
                 $directoy = dirname($newPath) . '/';
@@ -100,10 +178,10 @@ function processTypes($type, $path) {
                 }
                 
                 // Output that we are processing that file
-                echo '	Processing File: ' . $oldPath . ' -> ' . $newPath . PHP_EOL;
+                echo '	Processing File: ' . $value . PHP_EOL;
                 
                 // Process the file
-                $output = processFile('scss -f ' . $oldPath . ' ' . $newPath . '');
+                $output = processFile('scss --sourcemap -f ' . $oldPath . ' ' . $newPath . '');
                 
                 // If the output has generated an error, stop
                 if ($output === false) {
@@ -112,9 +190,13 @@ function processTypes($type, $path) {
             }	
             break;
 		case 'less':
-			if (!is_dir($path . '/.less/')) {
+			if (!is_dir($path . '/.less')) {
                 // Create the directoy if it doesn't exist
             	mkdir($path . '/.less/', 0777, true);
+            }
+			if (!is_dir($tmpPath . '/less')) {
+                // Create the directoy if it doesn't exist
+            	mkdir($tmpPath . '/less/', 0777, true);
             }
 			// Get all the files we need to process
             $result = processFiles(fillArrayWithFileNodes(new DirectoryIterator($path . '/.less/')));
@@ -126,8 +208,8 @@ function processTypes($type, $path) {
             foreach ($result as $row => $value) {
                 
                 // Define where the new compiled file is going
-				$oldPath = $path . '/.less/' . $value;
-                $newPath = $path . '/css/' . str_replace('.less', '.less.css', $value);
+				$oldPath = '.less/' . $value;
+                $newPath = 'css/' . str_replace('.less', '.less.css', $value);
                 
                 // Check that the directoy exists
                 $directoy = dirname($newPath) . '/';
@@ -138,7 +220,7 @@ function processTypes($type, $path) {
                 }
                 
                 // Output that we are processing that file
-                echo '	Processing File: ' . $oldPath . ' -> ' . $newPath . PHP_EOL;
+                echo '	Processing File: ' . $value . PHP_EOL;
                 
                 // Process the file
                 $output = processFile('lessc ' . $oldPath . ' ' . $newPath . '');
@@ -150,9 +232,13 @@ function processTypes($type, $path) {
             }	
             break;
 		case 'dart':
-			if (!is_dir($path . '/.dart/')) {
+			if (!is_dir($path . '/.dart')) {
                 // Create the directoy if it doesn't exist
             	mkdir($path . '/.dart/', 0777, true);
+            }
+			if (!is_dir($tmpPath . '/dart')) {
+                // Create the directoy if it doesn't exist
+            	mkdir($tmpPath . '/dart/', 0777, true);
             }
 			// Get all the files we need to process
             $result = processFiles(fillArrayWithFileNodes(new DirectoryIterator($path . '/.dart/')));
@@ -164,8 +250,8 @@ function processTypes($type, $path) {
             foreach ($result as $row => $value) {
                 
                 // Define where the new compiled file is going
-				$oldPath = $path . '/.dart/' . $value;
-                $newPath = $path . '/js/' . str_replace('.dart', '.dart.js', $value);
+				$oldPath = '.dart/' . $value;
+                $newPath = 'js/' . str_replace('.dart', '.dart.js', $value);
                 
                 // Check that the directoy exists
                 $directoy = dirname($newPath) . '/';
@@ -176,7 +262,7 @@ function processTypes($type, $path) {
                 }
                 
                 // Output that we are processing that file
-                echo '	Processing File: ' . $oldPath . ' -> ' . $newPath . PHP_EOL;
+                echo '	Processing File: ' . $value . PHP_EOL;
 				
 				// Process the file
                 $output = processFile('dart2js ' . $oldPath . ' -o ' . $newPath . '');
@@ -246,12 +332,26 @@ $siteSettings = $GLOBALS['SITE']->getSettings();
 // Get the resource path
 $realDirectoyPath = realpath('../public/resources/');
 
+// Create the temp working directoy
+mkdir('tmp', 0777, true);
+
+// Move into that directory
+chdir('tmp');
+
+// Get the tmp path
+$realTMPPath = dirname(__FILE__). '/tmp';
+
+// Copy resources into tmp
+copyDirRecursively($realDirectoyPath,$realTMPPath);
+echo 'Copying resources into temporary working directory'.PHP_EOL;
+
+
 // Process according to settings
 foreach ($siteSettings['compilation'] as $row => $value) {
     // If this option is enabled
     if ($value === true) {
         // Process the type
-        if (processTypes($row, $realDirectoyPath) === false) {
+        if (processTypes($row, $realDirectoyPath, $realTMPPath) === false) {
             // Tell us if it failed
             echo 'Failed' . PHP_EOL;
             // Stop processing types
@@ -259,3 +359,12 @@ foreach ($siteSettings['compilation'] as $row => $value) {
         }
     }
 }
+chdir('../');
+
+echo 'Updating public with new compiled resources'.PHP_EOL;
+
+// Replace live files with the new ones in tmp
+moveDirRecursively($realTMPPath,$realDirectoyPath);
+
+// Remove the temp directory
+removeDirRecursively('tmp');
