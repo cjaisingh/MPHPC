@@ -19,12 +19,44 @@ To Do
 
 -   Expand forms class to include more input methods
 -   Standard for session variables according to page
+-   Calendar Handler
+-   Email Handler
+-   Encryption Handler
+-   File Handler
+-   Form Validation (Serverside) Handler
+-   Table Handler
+-   Input Handler
+-   Zip Encoding Handler
+-   URL Handler
+-   Error Handler
+-   CAPTCHA Handler
+-   Cookie Handler
+-   Date Handler
+-   Directory Handler
+-   Download Handler
 
 This is still extremely unfinished.
 
 License
 ----------
+Copyright (c) Ryan Howell 2014
 
-- Copyright © Ryan Howell 2013
-- All Rights Reserved.
-- Any work contributed is solely owned by that contributor and acknowledge that their work can only be used within this project without express written consent from Ryan Howell.
+GNU GENERAL PUBLIC LICENSE (Version 3, 29 June 2007)
+
+Full license is available at: http://www.gnu.org/licenses/gpl.html
+
+Required
+- Disclose Source 
+- License and copyright notice 
+- State Changes
+
+Permitted
+- Commercial Use 
+- Distribution 
+- Modification 
+- Patent Grant 
+- Private Use 
+
+Forbidden
+- Hold Liable 
+- Sublicensing
