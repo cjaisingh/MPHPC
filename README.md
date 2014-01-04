@@ -8,16 +8,21 @@ This is my own take on what a modern PHP framework core should be.
 Feature List
 ------------
 
--   SASS Compilation
--   JavaScript Compilation
+-   Recursive SASS Compilation
+-   Recursive LESS Compilation
+-   Recursive JavaScript Compilation
+-   Dart Compilation
 -   Global Site Settings
 -   Database Class
 -   Forms Class
 
 To Do
 -----
-
--   Expand forms class to include more input methods
+-	Compilation
+	-	Need to use a temp working directoy
+	-	Need to generate source maps where possible
+-   Forms
+	-	Expand to include more input methods
 -   Standard for session variables according to page
 -   Calendar Handler
 -   Email Handler
