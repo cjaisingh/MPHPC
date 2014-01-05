@@ -6,7 +6,6 @@ require_once('traits/textinput.trait.php');
 
 /**
  * Class Form
- * @todo: Use classes for each input method, forms class should only use those classes to append to the form
  */
 class Form
 {
