@@ -36,6 +36,13 @@ $thisPage->renderView('header');
 
             <p>You can return the rendered form by using $myForm->render(); (you then should append this into your $body
                 variable where needed.)</p>
+            <?php
+                $form = new Form();
+                $form->button();
+                $form->checkbox();
+                $form->textInput();
+                echo $form->render();
+            ?>
         </div>
     </article>
 <?php
