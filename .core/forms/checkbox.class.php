@@ -22,7 +22,7 @@ class Checkbox
      * @param autofocus => (true, false)   [false]     (Specifies that a input should automatically get focus when the page loads)
      * @param disabled => (true, false)   [false]     (Specifies that a input should be disabled)
      * @param readonly => (true, false)   [false]     (Specifies that an input field is read-only)
-     * @return string
+     * @return integer
      */
     public function __construct($options = array())
     {

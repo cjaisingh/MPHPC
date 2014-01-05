@@ -3,7 +3,7 @@
 require_once('traits/textinput.trait.php');
 
 /**
- * Class Checkbox
+ * Class TextInput
  */
 class TextInput
 {

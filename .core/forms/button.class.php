@@ -20,7 +20,7 @@ class Button
      * @param onclick => (true, false)                     [false]         (Specifies the onClick of the button)
      * @param autofocus => (true, false)                     [false]         (Specifies that a button should automatically get focus when the page loads)
      * @param disabled => (true, false)                     [false]         (Specifies that a button should be disabled)
-     * @return string or integer
+     * @return integer
      */
     public function __construct($options = array())
     {
