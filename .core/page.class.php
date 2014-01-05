@@ -14,7 +14,10 @@ class Page
         // Include forms if requested
         if (isset($settings['forms'])) {
             if ($settings['forms'] == true) {
-                require_once('form.class.php');
+                require_once('forms/form.class.php');
+                require_once('forms/button.class.php');
+                require_once('forms/checkbox.class.php');
+                require_once('forms/textinput.class.php');
             }
         }
         if (isset($settings['authentication'])) {
