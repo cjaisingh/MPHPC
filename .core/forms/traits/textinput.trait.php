@@ -51,7 +51,7 @@ trait TextInputTrait {
             $options['spellcheck'] = false;
         }
         // Draw the start of the input
-        $tempHTML = '<input type="' . $options['type'] . '"';
+        $tempHTML = '<input type="text"';
         // Allow disabling the button
         if ($options['disabled'] != false) {
             $tempHTML .= ' disabled="disabled"';
