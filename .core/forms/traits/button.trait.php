@@ -1,5 +1,5 @@
 <?php
-trait Button {
+trait ButtonTrait {
     /**
      * Button Constructor
      * Call the function to generate a button, pass through options to customize.
@@ -10,9 +10,9 @@ trait Button {
      * @param onclick => (true, false)                     [false]         (Specifies the onClick of the button)
      * @param autofocus => (true, false)                     [false]         (Specifies that a button should automatically get focus when the page loads)
      * @param disabled => (true, false)                     [false]         (Specifies that a button should be disabled)
-     * @return string or integer
+     * @return string
      */
-    public function button($options = array())
+    public function buttonTrait($options = array())
     {
         // Set default option values
         if (!isset($options['type'])) {
@@ -63,8 +63,7 @@ trait Button {
             $options['value'] = ucfirst($options['type']);
         }
         // Handle the html
-        $this->formBodyHTML .= $tempHTML .= '>' . $options['value'] . '</button>';
-        return true;
+        return $tempHTML .= '>' . $options['value'] . '</button>';
     }
 }
 ?>

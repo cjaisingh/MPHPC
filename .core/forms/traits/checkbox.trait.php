@@ -1,5 +1,5 @@
 <?php
-trait Checkbox {
+trait CheckBoxTrait {
     /**
      * Checkbox Constructor
      * Call the function to generate a checkbox input, pass through options to customize.
@@ -12,9 +12,9 @@ trait Checkbox {
      * @param autofocus => (true, false)   [false]     (Specifies that a input should automatically get focus when the page loads)
      * @param disabled => (true, false)   [false]     (Specifies that a input should be disabled)
      * @param readonly => (true, false)   [false]     (Specifies that an input field is read-only)
-     * @return string or integer
+     * @return string
      */
-    public function checkbox($options = array())
+    public function checkboxTrait($options = array())
     {
         // Set default option values
         if (!isset($options['name'])) {
@@ -73,8 +73,7 @@ trait Checkbox {
             $tempHTML .= ' name="' . $options['name'] . '" id="' . $options['name'] . '"';
         }
         // Handle the html
-        $this->formBodyHTML .= $tempHTML .= '>';
-        return true;
+        return $tempHTML .= '>';
     }
 }
 ?>

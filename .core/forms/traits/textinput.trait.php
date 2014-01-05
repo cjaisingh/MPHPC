@@ -1,5 +1,5 @@
 <?php
-trait TextInput {
+trait TextInputTrait {
     /**
      * Text Input Constructor
      * Call the function to generate a text input, pass through options to customize.
@@ -15,9 +15,9 @@ trait TextInput {
      * @param maxlength => (0-999, false)      [false]         (Specifies the maximum number of characters allowed in an <input> element)
      * @param pattern => (regexp, false)     [false]         (Specifies a regular expression that an <input> element's value is checked against)
      * @param spellcheck => (true, false)       [false]         (Specifies whether the element is to have its spelling and grammar checked or not)
-     * @return string or integer
+     * @return string
      */
-    public function textInput($options = array())
+    public function textInputTrait($options = array())
     {
         // Set default option values
         if (!isset($options['name'])) {
@@ -97,7 +97,6 @@ trait TextInput {
             $options['value'] = 'Text';
         }
         // Handle the html
-        $this->formBodyHTML .= $tempHTML .= ' value="' . $options['value'] . '">';
-        return true;
+        return $tempHTML .= ' value="' . $options['value'] . '">';
     }
 }

@@ -14,9 +14,9 @@ class Form
     private $formStartHTML;
     private $formBodyHTML = '';
     private $formEndHTML;
-    use Button;
-    use Checkbox;
-    use TextInput;
+    use ButtonTrait;
+    use CheckBoxTrait;
+    use TextInputTrait;
 
     /**
      * Form Constructor
@@ -114,6 +114,64 @@ class Form
         return true;
     }
 
+    /**
+     * Button Constructor
+     * Call the function to generate a button, pass through options to customize.
+     * @param type => ('button', 'submit', 'reset')    ['button']      (Specifies the type of the button)
+     * @param name => (true, false)                     [false]         (Specifies a name and id for the button)
+     * @param value => (true, false)                     [ucfirst(type)] (Specifies an initial value for the button)
+     * @param class => (true, false)                     [false]         (Specifies the class of the button)
+     * @param onclick => (true, false)                     [false]         (Specifies the onClick of the button)
+     * @param autofocus => (true, false)                     [false]         (Specifies that a button should automatically get focus when the page loads)
+     * @param disabled => (true, false)                     [false]         (Specifies that a button should be disabled)
+     * @return integer
+     */
+    public function button($options = array()){
+        $this->formBodyHTML .= $this->ButtonTrait($options);
+        return true;
+    }
+
+    /**
+     * Checkbox Constructor
+     * Call the function to generate a checkbox input, pass through options to customize.
+     * @param createElement => (true, false)   [true]      (Specifies whether to generate the element as part of the form, or return the html)
+     * @param required => (true, false)   [false]     (Specifies that an input field must be filled out before submitting the form)
+     * @param name => (true, false)   [false]     (Specifies a name and id for the input)
+     * @param checked => (true, false)   [false]     (Specifies whether the checkbox is checked)
+     * @param class => (true, false)   [false]     (Specifies the class of the input)
+     * @param onclick => (true, false)   [false]     (Specifies the onClick of the input)
+     * @param autofocus => (true, false)   [false]     (Specifies that a input should automatically get focus when the page loads)
+     * @param disabled => (true, false)   [false]     (Specifies that a input should be disabled)
+     * @param readonly => (true, false)   [false]     (Specifies that an input field is read-only)
+     * @return integer
+     */
+    public function checkbox($options = array()){
+        $this->formBodyHTML .= $this->checkboxTrait($options);
+        return true;
+    }
+
+    /**
+     * Text Input Constructor
+     * Call the function to generate a text input, pass through options to customize.
+     * @param createElement => (true, false)        [true]          (Specifies whether to generate the element as part of the form, or return the html)
+     * @param required => (true, false)            [false]         (Specifies that an input field must be filled out before submitting the form)
+     * @param name => (true, false)        [false]         (Specifies a name and id for the input)
+     * @param value => (true, false)        [ucfirst(type)] (Specifies an initial value for the input)
+     * @param class => (true, false)        [false]         (Specifies the class of the input)
+     * @param onclick => (true, false)        [false]         (Specifies the onClick of the input)
+     * @param autofocus => (true, false)        [false]         (Specifies that a input should automatically get focus when the page loads)
+     * @param disabled => (true, false)        [false]         (Specifies that a input should be disabled)
+     * @param readonly => (true, false)       [false]         (Specifies that an input field is read-only)
+     * @param maxlength => (0-999, false)      [false]         (Specifies the maximum number of characters allowed in an <input> element)
+     * @param pattern => (regexp, false)     [false]         (Specifies a regular expression that an <input> element's value is checked against)
+     * @param spellcheck => (true, false)       [false]         (Specifies whether the element is to have its spelling and grammar checked or not)
+     * @return integer
+     */
+    public function textInput($options = array())
+    {
+        $this->formBodyHTML .= $this->textInputTrait($options);
+        return true;
+    }
     /**
      * Form Render
      * Call the function to render the form created by this class
