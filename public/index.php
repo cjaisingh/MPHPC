@@ -28,22 +28,6 @@ $thisPage->renderView('header');
             <p>A modern PHP framework core.</p>
 
             <p>This is my own take on what a modern PHP framework core should be.</p>
-
-            <h2>Feature List</h2>
-            <ul role="list">
-                <li role="listitem">SASS Compilation</li>
-                <li role="listitem">JavaScript Compilation</li>
-                <li role="listitem">Global Site Settings</li>
-                <li role="listitem">Database Class</li>
-                <li role="listitem">Forms Class</li>
-            </ul>
-            <h2>To Do</h2>
-            <ul role="list">
-                <li role="listitem">Expand forms class to include more input methods</li>
-                <li role="listitem">Standard for session variables according to page</li>
-                <li role="listitem">Login System</li>
-            </ul>
-            <p>This is still extremely unfinished.</p>
         </div>
     </article>
 
@@ -59,7 +43,7 @@ $thisPage->renderView('header');
                 <li role="listitem">(optional) If you require custom error pages, update .settings/errors.conf, and
                     include this file in your virtual host.
                 </li>
-                <li role="listitem">(optional) If you require sass/js compilation, <a href="hooks">click here</a>.</li>
+                <li role="listitem">(optional) If you require compilation, <a href="hooks">click here</a>.</li>
             </ol>
         </div>
     </article>
