@@ -20,8 +20,6 @@ To Do
 -----
 -   Forms
 	-	Expand to include more input methods
-	-	Create traits for each input method
-	-	Use classes for each input method, forms class should only use those classes to append to the form
 -   Standard for session variables according to page
 -   Calendar Handler
 -   Email Handler
